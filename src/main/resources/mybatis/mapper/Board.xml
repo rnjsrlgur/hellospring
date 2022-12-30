@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.start.hellospring.repository.IBoardRepository">
+
+    <select id="findAll" resultType="com.start.hellospring.domain.Board">
+        select * from board
+    </select>
+
+    <select id="findById" resultType="com.start.hellospring.domain.Board">
+        select * from Board where board_id=#{id}
+    </select>
+
+    <update id="modifyBoard" parameterType="com.start.hellospring.domain.Board">
+        update Board set price=#{price} where board_id=#{board_id}
+    </update>
+
+    <delete id="deleteBoard" parameterType="com.start.hellospring.domain.Board">
+        delete from Board where board_id=${id}
+    </delete>
+
+    <insert id="save" parameterType="com.start.hellospring.domain.Board">
+        insert into board values(board_seq.nextval, #{subject}, #{price}, #{image_name})
+    </insert>
+
+    <select id="findRecent" resultType="com.start.hellospring.domain.Board">
+        select * from board order by board_id desc limit 1
+    </select>
+</mapper>
